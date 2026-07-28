@@ -244,6 +244,25 @@
   .fw-card p{margin:0 0 6px;font-size:12.5px;color:var(--sub);line-height:1.55;}
   .fw-card b{color:var(--text);}
 
+  .project-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media(max-width:900px){.project-grid{grid-template-columns:1fr;}}
+  .project-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px;box-shadow:var(--shadow);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+  .project-card::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg, transparent, rgba(255,255,255,.05), transparent);transform:translateX(-100%);transition:transform .75s ease;pointer-events:none;}
+  .project-card:hover::before{transform:translateX(100%);}
+  .project-card:hover{border-color:var(--border-strong);transform:translateY(-2px);box-shadow:0 14px 30px rgba(2,8,23,.24);}
+  .project-card .story-tag{margin-bottom:8px;}
+  .project-card h4{font-size:16.5px;margin:0 0 4px;font-weight:800;}
+  .project-role{font-size:11.5px;color:var(--muted);font-weight:600;margin-bottom:12px;}
+  .project-card ul{margin:0 0 14px;padding-left:18px;color:var(--sub);font-size:13.3px;line-height:1.65;}
+  .project-card ul li{margin-bottom:4px;}
+  .project-card ul li b{color:var(--text);}
+  .project-tools{display:flex;flex-wrap:wrap;gap:6px;margin:auto 0 14px;padding-top:2px;}
+  .project-tools span{font-size:10.5px;font-weight:700;letter-spacing:.04em;color:var(--blue-soft);background:rgba(93,124,255,0.1);border:1px solid rgba(93,124,255,0.22);border-radius:999px;padding:4px 10px;}
+  .project-links{display:flex;gap:10px;flex-wrap:wrap;}
+  .project-links a{font-size:12px;font-weight:700;color:var(--teal);text-decoration:none;border:1px solid rgba(51,197,180,0.28);background:rgba(51,197,180,0.08);border-radius:999px;padding:7px 12px;transition:all .18s ease;display:inline-flex;align-items:center;gap:5px;}
+  .project-links a:hover{border-color:var(--teal);transform:translateY(-1px);}
+  .project-note{background:rgba(216,169,106,0.08);border:1px solid rgba(216,169,106,0.24);border-radius:10px;padding:14px 16px;font-size:12.5px;color:var(--gold);line-height:1.55;margin-bottom:20px;}
+
   footer{text-align:center;color:var(--muted);font-size:12px;padding:36px 24px 50px;border-top:1px solid rgba(255,255,255,0.06);margin-top:20px;}
   .table-scroll{overflow-x:auto;}
 
@@ -315,6 +334,7 @@
         </div>
         <div class="cta-row" style="margin-top:10px;">
           <button class="btn" onclick="go('stories')">View Job-Responsibility Impact Stories</button>
+          <button class="btn" onclick="go('projects')">View Finance Project Portfolio</button>
         </div>
       </div>
       <div class="side-panel">
@@ -497,9 +517,98 @@
     </div>
   </section>
 
+  <!-- FINANCE PROJECT PORTFOLIO -->
+  <section id="projects">
+    <div class="eyebrow">Section 5</div>
+    <h2 class="section-title">Finance Project Portfolio</h2>
+    <p class="section-sub">Skills sections only claim ability — these projects prove it. Each one is a self-contained deliverable with a clear "what I did, how I did it, what it produced."</p>
+
+    <div class="project-note">Add a link (Google Drive, PDF, or Notion page) behind each "View Project" button so recruiters can open the actual file — that's what turns a claim into evidence.</div>
+
+    <div class="project-grid">
+      <div class="project-card">
+        <div class="story-tag">Valuation</div>
+        <h4>Three-Statement Model &amp; DCF Valuation</h4>
+        <div class="project-role">Independent equity valuation project</div>
+        <ul>
+          <li>Built a fully linked <b>three-statement financial model</b> (income statement, balance sheet, cash flow) for a publicly listed company from 5 years of historical filings.</li>
+          <li>Ran a <b>DCF valuation</b> with sensitivity tables on WACC and terminal growth, cross-checked against trading comps.</li>
+          <li>Outcome: derived an intrinsic value range and a documented Buy/Hold/Sell view, presented as a 1-page investment summary.</li>
+        </ul>
+        <div class="project-tools"><span>Excel</span><span>DCF</span><span>Comparable Comps</span><span>Financial Modelling</span></div>
+        <div class="project-links"><a href="#">View Project ↗</a><a href="#">Download Model (.xlsx)</a></div>
+      </div>
+
+      <div class="project-card">
+        <div class="story-tag">Equity Research</div>
+        <h4>Equity Research Initiation Report</h4>
+        <div class="project-role">Sell-side style research coverage</div>
+        <ul>
+          <li>Authored an <b>initiation report</b> on a publicly traded company, covering industry structure, competitive positioning, and financial history.</li>
+          <li>Combined DCF and comps into a blended target price, with a clearly stated investment thesis and key risks.</li>
+          <li>Outcome: formatted to sell-side research standards and used as a work sample in interviews to demonstrate technical and communication skill together.</li>
+        </ul>
+        <div class="project-tools"><span>Equity Research</span><span>Industry Analysis</span><span>PowerPoint</span><span>Valuation</span></div>
+        <div class="project-links"><a href="#">View Project ↗</a><a href="#">Download Report (.pdf)</a></div>
+      </div>
+
+      <div class="project-card">
+        <div class="story-tag">Portfolio Strategy</div>
+        <h4>Portfolio Growth-Share Analysis</h4>
+        <div class="project-role">Multi-account portfolio review, applied at work</div>
+        <ul>
+          <li>Segmented a 6-account, $121M portfolio into a growth-share matrix (Stars / Cash Cows / Question Marks) using revenue growth and relative margin.</li>
+          <li>Built the underlying dataset and visualization from raw multi-source exports — the same matrix now live in the <a href="#" onclick="go('lab');return false;" style="color:var(--teal);">Analysis Lab</a> section of this dashboard.</li>
+          <li>Outcome: reallocation recommendation that shifted budget toward the two highest-growth, highest-margin accounts.</li>
+        </ul>
+        <div class="project-tools"><span>Portfolio Analysis</span><span>Excel</span><span>Data Visualization</span><span>Strategy</span></div>
+        <div class="project-links"><a href="#">View Project ↗</a></div>
+      </div>
+
+      <div class="project-card">
+        <div class="story-tag">FP&amp;A</div>
+        <h4>Rolling Forecast &amp; Variance Bridge Model</h4>
+        <div class="project-role">Budget vs. forecast automation, applied at work</div>
+        <ul>
+          <li>Built a rolling 12-month forecast model with an automated <b>variance bridge</b> isolating volume, price, mix, and cost drivers quarter over quarter.</li>
+          <li>Standardized the commentary template feeding senior management review decks.</li>
+          <li>Outcome: cut variance write-up time by 40% and lifted forecast accuracy to 97.8% across 48 planning cycles.</li>
+        </ul>
+        <div class="project-tools"><span>FP&amp;A</span><span>Forecasting</span><span>Excel</span><span>Automation</span></div>
+        <div class="project-links"><a href="#">View Project ↗</a><a href="#">Download Model (.xlsx)</a></div>
+      </div>
+
+      <div class="project-card">
+        <div class="story-tag">Case Competition</div>
+        <h4>Corporate Finance Case Competition</h4>
+        <div class="project-role">Team-based, timed case competition</div>
+        <ul>
+          <li>Solved a corporate finance case (capital allocation vs. dividend/buyback trade-off) under a fixed, competition-length deadline.</li>
+          <li>Built the supporting model and a leadership-ready recommendation deck as a 4-person team.</li>
+          <li>Outcome: presented final recommendation live to a panel of judges from industry — a direct rehearsal for ad hoc senior management requests.</li>
+        </ul>
+        <div class="project-tools"><span>Case Competition</span><span>Capital Allocation</span><span>Teamwork</span><span>Presentation</span></div>
+        <div class="project-links"><a href="#">View Project ↗</a></div>
+      </div>
+
+      <div class="project-card">
+        <div class="story-tag">Automation</div>
+        <h4>Reconciliation Automation Build</h4>
+        <div class="project-role">Process improvement, applied at work</div>
+        <ul>
+          <li>Replaced a manual monthly reconciliation process with an automated check using Power Query and structured validation rules.</li>
+          <li>Documented the control so it could be handed off and audited without tribal knowledge.</li>
+          <li>Outcome: cut the reconciliation error rate by 45% and freed up time for higher-value ad hoc analysis.</li>
+        </ul>
+        <div class="project-tools"><span>Power Query</span><span>Controls</span><span>Process Design</span><span>Excel</span></div>
+        <div class="project-links"><a href="#">View Project ↗</a></div>
+      </div>
+    </div>
+  </section>
+
   <!-- DECISION PLAYBOOK -->
   <section id="playbook">
-    <div class="eyebrow">Section 5</div>
+    <div class="eyebrow">Section 6</div>
     <h2 class="section-title">FP&amp;A Decision Playbook</h2>
     <p class="section-sub">Framework applied to each core job responsibility in the posting.</p>
     <div class="panel">
@@ -521,7 +630,7 @@
 
   <!-- AUTOMATION & CONTROLS -->
   <section id="cost">
-    <div class="eyebrow">Section 6</div>
+    <div class="eyebrow">Section 7</div>
     <h2 class="section-title">Process Automation &amp; Controls</h2>
     <p class="section-sub">Directly evidences "enhancing controls and streamlining processes, introducing automation where possible."</p>
     <div class="two-col">
@@ -555,7 +664,7 @@
 
   <!-- CAPABILITY CENTER -->
   <section id="capability">
-    <div class="eyebrow">Section 7</div>
+    <div class="eyebrow">Section 8</div>
     <h2 class="section-title">Capability Center</h2>
     <p class="section-sub">Skill weighting reflects the required qualifications listed in the posting.</p>
     <div class="skill-grid">
@@ -570,7 +679,7 @@
 
   <!-- EXECUTIVE TOOLKIT -->
   <section id="toolkit">
-    <div class="eyebrow">Section 8</div>
+    <div class="eyebrow">Section 9</div>
     <h2 class="section-title">FP&amp;A Toolkit</h2>
     <p class="section-sub">The frameworks behind every job responsibility in the posting.</p>
     <div class="toolkit-grid">
@@ -639,6 +748,7 @@
     ['lab','Analysis Lab'],
     ['scenario','Forecast Simulator'],
     ['stories','Impact Stories'],
+    ['projects','Project Portfolio'],
     ['playbook','Decision Playbook'],
     ['cost','Automation & Controls'],
     ['capability','Capability Center'],

@@ -6,22 +6,24 @@
 <title>Sanju Nivasini | FP&amp;A Decision Intelligence Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 <style>
 :root {
- --bg: #060b14;
- --ink: #eff6ff;
- --muted: #9fb3d4;
- --line: rgba(145, 177, 226, 0.22);
- --panel: rgba(9, 19, 37, 0.78);
- --blue: #5db4ff;
- --cyan: #80e6ff;
- --gold: #e8c16f;
- --green: #83e6bb;
- --red: #f08c94;
- --amber: #f3b46c;
- --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+ --bg: #0a0e17;
+ --ink: #e7ebf2;
+ --muted: #8b96ab;
+ --line: rgba(160, 172, 196, 0.16);
+ --panel: rgba(13, 18, 30, 0.86);
+ --blue: #5b84ad;
+ --cyan: #7d99b8;
+ --gold: #c9a35f;
+ --green: #6f9c7f;
+ --red: #b56b6f;
+ --amber: #c68f52;
+ --serif: "Source Serif 4", Georgia, serif;
+ --mono: "IBM Plex Mono", ui-monospace, monospace;
+ --shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -29,43 +31,30 @@ body {
  margin: 0;
  font-family: Manrope, sans-serif;
  color: var(--ink);
- background:
-   radial-gradient(circle at 18% -10%, rgba(93, 180, 255, 0.22), transparent 34%),
-   radial-gradient(circle at 84% 0%, rgba(232, 193, 111, 0.16), transparent 36%),
-   linear-gradient(150deg, #050914 0%, #0a1629 48%, #0d223c 100%);
-}
-body::after {
- content: "";
- position: fixed;
- inset: 0;
- z-index: -1;
- pointer-events: none;
- background: radial-gradient(circle at var(--mx, 50%) var(--my, 20%), rgba(93, 180, 255, 0.12), transparent 34%);
- transition: background 0.18s ease;
+ background: #0a0e17;
 }
 body::before {
  content: "";
  position: fixed;
  inset: 0;
  pointer-events: none;
- background-image:
-   linear-gradient(to right, rgba(144, 176, 226, 0.07) 1px, transparent 1px),
-   linear-gradient(to bottom, rgba(144, 176, 226, 0.07) 1px, transparent 1px);
- background-size: 44px 44px;
- mask-image: radial-gradient(circle at center, black 52%, transparent 92%);
+ background-image: linear-gradient(to bottom, rgba(160, 172, 196, 0.05) 1px, transparent 1px);
+ background-size: 100% 64px;
  z-index: -1;
 }
 h1, h2, h3, p { margin: 0; }
+h1, h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; }
 a { color: inherit; }
+::selection { background: rgba(201, 163, 95, 0.28); }
+:focus-visible { outline: 1px solid rgba(201, 163, 95, 0.75); outline-offset: 2px; }
 .scroll-progress {
  position: fixed;
  top: 0;
  left: 0;
  z-index: 100;
- height: 3px;
+ height: 2px;
  width: 0;
- background: linear-gradient(90deg, var(--gold), var(--cyan), var(--blue));
- box-shadow: 0 0 18px rgba(93, 180, 255, 0.45);
+ background: var(--gold);
  transition: width 0.08s linear;
 }
 .topbar {
@@ -73,52 +62,51 @@ a { color: inherit; }
  top: 0;
  z-index: 50;
  border-bottom: 1px solid var(--line);
- background: rgba(5, 10, 19, 0.9);
+ background: rgba(9, 13, 22, 0.94);
  backdrop-filter: blur(18px);
 }
 .nav {
  width: min(1320px, 94vw);
  margin: 0 auto;
- min-height: 64px;
+ min-height: 60px;
  display: flex;
  align-items: center;
  justify-content: space-between;
  gap: 18px;
 }
 .brand { display: grid; gap: 2px; }
-.brand strong { font-size: 16px; }
-.brand span { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; }
-.links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+.brand strong { font-family: var(--serif); font-weight: 600; font-size: 16px; letter-spacing: 0.01em; }
+.brand span { color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: 0.16em; font-family: var(--mono); }
+.links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px; }
 .links a {
- border: 1px solid rgba(154, 189, 241, 0.24);
- border-radius: 8px;
- background: rgba(255, 255, 255, 0.035);
- color: #cfe0fb;
+ border: 1px solid transparent;
+ border-radius: 3px;
+ background: transparent;
+ color: #9aa5ba;
  padding: 7px 10px;
  font-size: 10px;
  text-decoration: none;
  text-transform: uppercase;
- letter-spacing: 0.07em;
+ letter-spacing: 0.09em;
+ font-family: var(--mono);
+ transition: color 0.15s ease, border-color 0.15s ease;
 }
 .links a:hover {
- border-color: rgba(93, 180, 255, 0.72);
- background: rgba(93, 180, 255, 0.16);
+ border-color: rgba(160, 172, 196, 0.22);
  color: #fff;
 }
 .links a.active {
- border-color: rgba(232, 193, 111, 0.64);
- background: rgba(232, 193, 111, 0.12);
- color: #fff;
+ border-color: rgba(201, 163, 95, 0.5);
+ color: var(--gold);
 }
 .shell { width: min(1320px, 94vw); margin: 0 auto; }
 section { scroll-margin-top: 84px; margin: 22px 0; }
 .panel {
  border: 1px solid var(--line);
- border-radius: 18px;
+ border-radius: 6px;
  background: var(--panel);
  box-shadow: var(--shadow);
- backdrop-filter: blur(12px);
- padding: 18px;
+ padding: 20px;
 }
 .hero {
  min-height: calc(100vh - 96px);
@@ -131,21 +119,15 @@ section { scroll-margin-top: 84px; margin: 22px 0; }
 .eyebrow {
  color: var(--gold);
  text-transform: uppercase;
- letter-spacing: 0.22em;
- font-size: 11px;
- font-weight: 800;
- margin-bottom: 12px;
+ letter-spacing: 0.16em;
+ font-size: 10px;
+ font-weight: 600;
+ font-family: var(--mono);
+ margin-bottom: 14px;
 }
-.hero h1 { font-size: clamp(46px, 7vw, 84px); line-height: 0.96; }
-.hero h1 .char {
- display: inline-block;
- opacity: 0;
- transform: translateY(18px);
- animation: charReveal 0.58s cubic-bezier(.2,.7,.2,1) forwards;
-}
-@keyframes charReveal { to { opacity: 1; transform: translateY(0); } }
-.hero h2 { margin-top: 14px; font-size: clamp(20px, 2.8vw, 32px); color: #b9d9ff; }
-.tagline { margin-top: 18px; color: #cfe0fb; font-size: 17px; line-height: 1.65; max-width: 720px; }
+.hero h1 { font-size: clamp(42px, 6vw, 72px); line-height: 1.02; font-weight: 600; }
+.hero h2 { margin-top: 12px; font-size: clamp(18px, 2.2vw, 26px); color: #aeb8cc; font-family: var(--serif); font-weight: 400; font-style: italic; }
+.tagline { margin-top: 18px; color: #b7c0d1; font-size: 15px; line-height: 1.7; max-width: 680px; }
 .hero-grid, .grid-2, .grid-3, .grid-4, .grid-5, .flow, .tree { display: grid; gap: 14px; }
 .hero-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 24px; gap: 16px; }
 .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -155,62 +137,48 @@ section { scroll-margin-top: 84px; margin: 22px 0; }
 .flow { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 .tree { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .metric, .kpi, .slide, .case-card, .tool-card, .tree-card {
- border: 1px solid rgba(154, 189, 241, 0.2);
- border-radius: 14px;
- background: rgba(255, 255, 255, 0.035);
+ border: 1px solid var(--line);
+ border-radius: 6px;
+ background: rgba(255, 255, 255, 0.02);
  padding: 14px;
 }
 .hero .metric {
- background:
-   linear-gradient(145deg, rgba(93, 180, 255, 0.11), rgba(232, 193, 111, 0.055)),
-   rgba(255, 255, 255, 0.04);
- border-color: rgba(154, 189, 241, 0.26);
- min-height: 178px;
- overflow: hidden;
+ background: rgba(255, 255, 255, 0.025);
+ border-color: var(--line);
+ border-top: 2px solid rgba(201, 163, 95, 0.4);
+ min-height: 168px;
  position: relative;
 }
-.hero .metric::after {
- content: "";
- position: absolute;
- inset: auto -30% -55% 18%;
- height: 90px;
- background: radial-gradient(circle, rgba(93, 180, 255, 0.18), transparent 68%);
- pointer-events: none;
-}
 .metric, .kpi, .slide, .case-card, .tool-card, .tree-card, .credential-card, .flow-step {
- transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+ transition: border-color 0.18s ease, background 0.18s ease;
 }
 .metric:hover, .kpi:hover, .slide:hover, .case-card:hover, .tool-card:hover, .tree-card:hover,
 .credential-card:hover, .flow-step:hover {
- border-color: rgba(93, 180, 255, 0.52);
- box-shadow: 0 16px 42px rgba(0, 0, 0, 0.28);
- transform: translateY(-3px);
-}
-.metric:hover strong, .kpi:hover strong { animation: numberPulse 0.72s ease; }
-@keyframes numberPulse {
- 0%, 100% { transform: scale(1); }
- 45% { transform: scale(1.035); }
+ border-color: rgba(201, 163, 95, 0.4);
+ background: rgba(255, 255, 255, 0.035);
 }
 .metric-icon, .card-icon {
  align-items: center;
- border: 1px solid rgba(93, 180, 255, 0.32);
- border-radius: 10px;
- background: rgba(93, 180, 255, 0.1);
- color: var(--cyan);
+ border: 1px solid rgba(201, 163, 95, 0.3);
+ border-radius: 3px;
+ background: rgba(201, 163, 95, 0.06);
+ color: var(--gold);
  display: inline-flex;
- height: 32px;
+ height: 26px;
  justify-content: center;
  margin-bottom: 10px;
- width: 32px;
+ padding: 0 8px;
+ min-width: 32px;
 }
 .metric-icon i, .card-icon i, .credential-icon i, .cfi-wordmark i {
  align-items: center;
  display: inline-flex;
  font-style: normal;
+ font-family: var(--mono);
  font-size: 9px;
- font-weight: 800;
+ font-weight: 600;
  justify-content: center;
- letter-spacing: 0.06em;
+ letter-spacing: 0.05em;
  line-height: 1;
 }
 [data-lucide]::before { content: "FIN"; }
@@ -235,36 +203,38 @@ section { scroll-margin-top: 84px; margin: 22px 0; }
 .metric small, .kpi small {
  display: block;
  color: var(--muted);
- font-size: 10px;
+ font-size: 9px;
  text-transform: uppercase;
  letter-spacing: 0.1em;
+ font-family: var(--mono);
  margin-bottom: 8px;
 }
-.metric strong, .kpi strong { display: block; font-size: 25px; color: #fff; }
-.hero .metric strong { font-size: 33px; letter-spacing: 0; }
-.metric span, .kpi span { display: block; margin-top: 6px; color: #a9c1e4; font-size: 11px; line-height: 1.5; }
+.metric strong, .kpi strong { display: block; font-size: 23px; color: #fff; font-family: var(--mono); font-weight: 500; letter-spacing: -0.01em; }
+.hero .metric strong { font-size: 29px; letter-spacing: -0.01em; }
+.metric span, .kpi span { display: block; margin-top: 6px; color: #97a2b8; font-size: 11px; line-height: 1.55; }
 .flagship-kpis .kpi {
  align-items: center;
  display: flex;
  flex-direction: column;
  justify-content: center;
- min-height: 132px;
+ min-height: 124px;
  text-align: center;
 }
 .flagship-kpis .kpi small { margin-bottom: 11px; }
-.flagship-kpis .kpi strong { font-size: 31px; line-height: 1; }
+.flagship-kpis .kpi strong { font-size: 28px; line-height: 1; }
 .fin-icon {
  align-items: center;
- border: 1px solid rgba(232, 193, 111, 0.38);
- border-radius: 8px;
- background: rgba(232, 193, 111, 0.1);
- color: #f4d895;
+ border: 1px solid rgba(201, 163, 95, 0.35);
+ border-radius: 3px;
+ background: rgba(201, 163, 95, 0.07);
+ color: var(--gold);
  display: inline-flex;
+ font-family: var(--mono);
  font-size: 10px;
- font-weight: 800;
- height: 24px;
+ font-weight: 600;
+ height: 22px;
  justify-content: center;
- letter-spacing: 0.04em;
+ letter-spacing: 0.03em;
  margin-right: 8px;
  min-width: 28px;
  padding: 0 6px;
@@ -278,9 +248,9 @@ section { scroll-margin-top: 84px; margin: 22px 0; }
 }
 .credential-card {
  align-items: center;
- border: 1px solid rgba(154, 189, 241, 0.2);
- border-radius: 14px;
- background: rgba(255, 255, 255, 0.035);
+ border: 1px solid var(--line);
+ border-radius: 6px;
+ background: rgba(255, 255, 255, 0.02);
  display: grid;
  gap: 12px;
  grid-template-columns: auto 1fr;
@@ -288,115 +258,93 @@ section { scroll-margin-top: 84px; margin: 22px 0; }
 }
 .credential-icon {
  align-items: center;
- border: 1px solid rgba(93, 180, 255, 0.42);
- border-radius: 12px;
- background: linear-gradient(145deg, rgba(93, 180, 255, 0.16), rgba(232, 193, 111, 0.1));
- color: #fff;
+ border: 1px solid rgba(201, 163, 95, 0.4);
+ border-radius: 4px;
+ background: rgba(201, 163, 95, 0.07);
+ color: var(--gold);
  display: inline-flex;
- font-size: 12px;
- font-weight: 800;
- height: 46px;
+ font-family: var(--mono);
+ font-size: 11px;
+ font-weight: 600;
+ height: 44px;
  justify-content: center;
- letter-spacing: 0.06em;
- min-width: 54px;
+ letter-spacing: 0.05em;
+ min-width: 52px;
 }
 .credential-card small {
  color: var(--gold);
  display: block;
  font-size: 9px;
- font-weight: 800;
- letter-spacing: 0.12em;
+ font-weight: 600;
+ font-family: var(--mono);
+ letter-spacing: 0.1em;
  margin-bottom: 4px;
  text-transform: uppercase;
 }
-.credential-card strong { color: #fff; display: block; font-size: 14px; }
-.credential-card span { color: #a9c1e4; display: block; font-size: 10px; line-height: 1.5; margin-top: 4px; }
+.credential-card strong { color: #fff; display: block; font-family: var(--serif); font-size: 15px; }
+.credential-card span { color: #97a2b8; display: block; font-size: 10px; line-height: 1.55; margin-top: 4px; }
 .cfi-wordmark {
  align-items: center;
- border: 1px solid rgba(232, 193, 111, 0.36);
- border-radius: 14px;
- background: linear-gradient(145deg, rgba(232, 193, 111, 0.13), rgba(93, 180, 255, 0.07));
+ border: 1px solid rgba(201, 163, 95, 0.32);
+ border-radius: 6px;
+ background: rgba(201, 163, 95, 0.05);
  color: #fff;
  display: inline-flex;
- font-size: 24px;
- font-weight: 800;
- letter-spacing: 0.02em;
+ font-family: var(--serif);
+ font-size: 21px;
+ font-weight: 600;
+ letter-spacing: 0.01em;
  margin-bottom: 16px;
- padding: 14px 18px;
+ padding: 12px 18px;
 }
 .reveal {
  opacity: 0;
- transform: translateY(18px);
- transition: opacity 0.7s ease, transform 0.7s ease;
+ transform: translateY(10px);
+ transition: opacity 0.5s ease, transform 0.5s ease;
 }
-.reveal[data-motion="blur"] { filter: blur(10px); }
-.reveal[data-motion="center"] { transform: scale(0.965); transform-origin: center; }
-.reveal[data-motion="left"] { transform: translateX(-24px); }
-.reveal[data-motion="unfold"] { transform: rotateX(-8deg) translateY(22px); transform-origin: top; }
-.reveal.visible {
- opacity: 1;
- transform: translateY(0);
- filter: blur(0);
-}
-.reveal.visible[data-motion="center"] { transform: scale(1); }
-.reveal.visible[data-motion="left"] { transform: translateX(0); }
-.reveal.visible[data-motion="unfold"] { transform: rotateX(0deg) translateY(0); }
-.kpi.metric-positive strong { color: var(--green); animation: valueGlowGreen 0.75s ease; }
-.kpi.metric-negative strong { color: var(--red); animation: valueGlowRed 0.75s ease; }
-@keyframes valueGlowGreen {
- 0% { text-shadow: 0 0 0 rgba(131,230,187,0); }
- 45% { text-shadow: 0 0 16px rgba(131,230,187,.42); }
- 100% { text-shadow: 0 0 0 rgba(131,230,187,0); }
-}
-@keyframes valueGlowRed {
- 0% { text-shadow: 0 0 0 rgba(240,140,148,0); }
- 45% { text-shadow: 0 0 16px rgba(240,140,148,.38); }
- 100% { text-shadow: 0 0 0 rgba(240,140,148,0); }
-}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.kpi.metric-positive strong { color: var(--green); }
+.kpi.metric-negative strong { color: var(--red); }
 .kpi-tooltip {
  position: fixed;
  z-index: 120;
- max-width: 310px;
+ max-width: 300px;
  pointer-events: none;
  opacity: 0;
- transform: translateY(8px);
- transition: opacity 0.18s ease, transform 0.18s ease;
- border: 1px solid rgba(154, 189, 241, 0.28);
- border-radius: 14px;
- background: rgba(7, 16, 31, 0.92);
- box-shadow: 0 18px 50px rgba(0,0,0,.36);
- backdrop-filter: blur(14px);
- color: #d8e7ff;
+ transform: translateY(6px);
+ transition: opacity 0.15s ease, transform 0.15s ease;
+ border: 1px solid var(--line);
+ border-radius: 6px;
+ background: rgba(11, 15, 24, 0.97);
+ box-shadow: var(--shadow);
+ color: #c7d0e0;
  font-size: 11px;
  line-height: 1.55;
  padding: 12px;
 }
 .kpi-tooltip.visible { opacity: 1; transform: translateY(0); }
 .kpi-tooltip strong {
- color: #fff;
+ color: var(--gold);
  display: block;
- font-size: 11px;
- letter-spacing: .08em;
+ font-family: var(--mono);
+ font-size: 10px;
+ letter-spacing: .06em;
  margin-bottom: 5px;
  text-transform: uppercase;
 }
 .hero .eyebrow, .hero h1, .hero h2, .hero .tagline, .credential-strip, .hero-grid {
- animation: heroRise 0.72s ease both;
+ animation: heroRise 0.6s ease both;
 }
-.hero h1 { animation-delay: 0.08s; }
-.hero h2 { animation-delay: 0.18s; }
-.hero .tagline { animation-delay: 0.28s; }
-.credential-strip { animation-delay: 0.38s; }
-.hero-grid { animation-delay: 0.48s; }
+.hero h1 { animation-delay: 0.05s; }
+.hero h2 { animation-delay: 0.1s; }
+.hero .tagline { animation-delay: 0.15s; }
+.credential-strip { animation-delay: 0.2s; }
+.hero-grid { animation-delay: 0.25s; }
 @keyframes heroRise {
- from { opacity: 0; transform: translateY(18px); }
+ from { opacity: 0; transform: translateY(10px); }
  to { opacity: 1; transform: translateY(0); }
 }
-.hero-card {
- background:
-   linear-gradient(145deg, rgba(93, 180, 255, 0.14), rgba(232, 193, 111, 0.08)),
-   var(--panel);
-}
+.hero-card { background: var(--panel); }
 .section-head {
  display: flex;
  align-items: end;
@@ -404,27 +352,28 @@ section { scroll-margin-top: 84px; margin: 22px 0; }
  gap: 16px;
  margin-bottom: 14px;
 }
-.section-head h2 { font-size: clamp(25px, 3vw, 38px); }
+.section-head h2 { font-size: clamp(22px, 2.6vw, 32px); }
 .section-head p { max-width: 660px; color: var(--muted); font-size: 12px; line-height: 1.65; }
 .label {
  display: inline-flex;
  align-items: center;
- border: 1px solid rgba(232, 193, 111, 0.4);
- border-radius: 999px;
+ border: 1px solid rgba(201, 163, 95, 0.4);
+ border-radius: 3px;
  padding: 6px 10px;
- color: #f4d895;
- background: rgba(232, 193, 111, 0.08);
+ color: var(--gold);
+ background: rgba(201, 163, 95, 0.06);
+ font-family: var(--mono);
  font-size: 10px;
  text-transform: uppercase;
- letter-spacing: 0.09em;
+ letter-spacing: 0.07em;
  white-space: nowrap;
 }
 .decision-strip {
- border-left: 3px solid var(--blue);
- background: rgba(93, 180, 255, 0.075);
- border-radius: 10px;
+ border-left: 2px solid var(--blue);
+ background: rgba(91, 132, 173, 0.06);
+ border-radius: 2px;
  padding: 13px;
- color: #d4e4fb;
+ color: #ccd3e0;
  font-size: 12px;
  line-height: 1.7;
  margin-bottom: 10px;
@@ -433,86 +382,87 @@ section { scroll-margin-top: 84px; margin: 22px 0; }
  color: #fff;
  display: block;
  text-transform: uppercase;
- letter-spacing: 0.09em;
- font-size: 10px;
- margin-bottom: 4px;
+ letter-spacing: 0.08em;
+ font-family: var(--mono);
+ font-size: 9px;
+ margin-bottom: 5px;
 }
 .chart-box {
- border: 1px solid rgba(154, 189, 241, 0.2);
- border-radius: 14px;
- background: rgba(255, 255, 255, 0.025);
+ border: 1px solid var(--line);
+ border-radius: 6px;
+ background: rgba(255, 255, 255, 0.015);
  padding: 12px;
  height: 330px;
  min-height: 300px;
  position: relative;
 }
 canvas { width: 100% !important; max-height: 100%; }
-.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
-table { width: 100%; border-collapse: collapse; font-size: 11px; color: #d3e2f9; }
-th, td { padding: 10px; border-bottom: 1px solid rgba(154, 189, 241, 0.12); text-align: left; vertical-align: top; }
-th { color: #f4f8ff; background: rgba(255, 255, 255, 0.035); text-transform: uppercase; letter-spacing: 0.08em; font-size: 10px; }
-.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.pos { color: var(--green); font-weight: 800; }
-.neg { color: var(--red); font-weight: 800; }
-.amber { color: var(--amber); font-weight: 800; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; }
+table { width: 100%; border-collapse: collapse; font-size: 11px; color: #c7cfdf; }
+th, td { padding: 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { color: #eef1f6; background: rgba(255, 255, 255, 0.025); text-transform: uppercase; letter-spacing: 0.07em; font-size: 9px; font-family: var(--mono); font-weight: 500; }
+.num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--mono); white-space: nowrap; }
+.pos { color: var(--green); font-weight: 600; }
+.neg { color: var(--red); font-weight: 600; }
+.amber { color: var(--amber); font-weight: 600; }
 .flow-step {
- border: 1px solid rgba(93, 180, 255, 0.26);
- background: rgba(93, 180, 255, 0.085);
- border-radius: 12px;
+ border: 1px solid var(--line);
+ border-top: 2px solid rgba(91, 132, 173, 0.4);
+ background: rgba(255, 255, 255, 0.02);
+ border-radius: 4px;
  padding: 12px;
  min-height: 112px;
 }
 .flow-step.active {
- border-color: rgba(232, 193, 111, 0.5);
- background: rgba(232, 193, 111, 0.09);
- box-shadow: 0 12px 36px rgba(232, 193, 111, 0.08);
+ border-top-color: rgba(201, 163, 95, 0.7);
+ background: rgba(201, 163, 95, 0.05);
 }
-.flow-step small { color: var(--cyan); text-transform: uppercase; letter-spacing: 0.09em; font-size: 9px; }
-.flow-step strong { display: block; margin: 8px 0 5px; }
-.flow-step p { color: #bfd3ee; font-size: 10px; line-height: 1.55; }
+.flow-step small { color: var(--muted); font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.09em; font-size: 9px; }
+.flow-step strong { display: block; margin: 8px 0 5px; font-family: var(--serif); font-weight: 600; }
+.flow-step p { color: #a3aec2; font-size: 10px; line-height: 1.55; }
 .slider-row { display: grid; gap: 8px; margin-bottom: 14px; }
-.slider-meta { display: flex; justify-content: space-between; color: #cfe0ff; font-size: 11px; }
-input[type="range"] { width: 100%; accent-color: var(--blue); }
-.tree-card h3 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+.slider-meta { display: flex; justify-content: space-between; color: #c7cfdf; font-family: var(--mono); font-size: 11px; }
+input[type="range"] { width: 100%; accent-color: var(--gold); }
+.tree-card h3 { color: #fff; font-family: var(--serif); font-size: 16px; margin-bottom: 10px; }
 .node {
- border: 1px solid rgba(154, 189, 241, 0.2);
- border-radius: 10px;
+ border: 1px solid var(--line);
+ border-radius: 4px;
  padding: 9px 10px;
  margin-top: 8px;
- background: rgba(255, 255, 255, 0.03);
+ background: rgba(255, 255, 255, 0.02);
  cursor: pointer;
- transition: 0.18s ease;
+ transition: 0.15s ease;
 }
-.node:hover, .node.active { border-color: rgba(93, 180, 255, 0.7); background: rgba(93, 180, 255, 0.12); }
+.node:hover, .node.active { border-color: rgba(201, 163, 95, 0.55); background: rgba(201, 163, 95, 0.06); }
 .node span { display: block; color: var(--muted); font-size: 10px; margin-top: 3px; }
-.project-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.project-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
 .project-tab-btn {
- border: 1px solid rgba(154, 189, 241, 0.26);
- border-radius: 999px;
- background: rgba(255, 255, 255, 0.035);
- color: #cfe0fb;
+ border: 1px solid var(--line);
+ border-radius: 3px;
+ background: transparent;
+ color: #97a2b8;
  cursor: pointer;
  font: inherit;
+ font-family: var(--mono);
  font-size: 10px;
- letter-spacing: 0.08em;
+ letter-spacing: 0.07em;
  padding: 8px 12px;
  text-transform: uppercase;
- transition: 0.18s ease;
+ transition: 0.15s ease;
 }
-.project-tab-btn:hover, .project-tab-btn.active {
- border-color: rgba(93, 180, 255, 0.78);
- background: rgba(93, 180, 255, 0.16);
- color: #fff;
+.project-tab-btn:hover { border-color: rgba(201, 163, 95, 0.4); color: #fff; }
+.project-tab-btn.active {
+ border-color: rgba(201, 163, 95, 0.6);
+ background: rgba(201, 163, 95, 0.08);
+ color: var(--gold);
 }
 #projects .project-tabs {
- border: 1px solid rgba(154, 189, 241, 0.16);
- border-radius: 14px;
- background: rgba(255, 255, 255, 0.025);
+ border: 1px solid var(--line);
+ border-radius: 6px;
+ background: rgba(255, 255, 255, 0.015);
  padding: 8px;
 }
-#projects .project-tab-btn.active {
- box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 10px 30px rgba(0, 0, 0, 0.24);
-}
+#projects .project-tab-btn.active { box-shadow: none; }
 .project-pane { display: none; }
 .project-pane.active { display: block; }
 .project-intel-grid {
@@ -522,50 +472,46 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
  margin-top: 14px;
 }
 .project-intel-card {
- border: 1px solid rgba(154, 189, 241, 0.2);
- border-radius: 14px;
- background: rgba(255, 255, 255, 0.03);
+ border: 1px solid var(--line);
+ border-radius: 6px;
+ background: rgba(255, 255, 255, 0.02);
  padding: 14px;
 }
-.project-intel-card h3 { color: #fff; font-size: 13px; margin-bottom: 8px; }
-.project-intel-card p { color: #c4d6ef; font-size: 11px; line-height: 1.65; }
+.project-intel-card h3 { color: #fff; font-family: var(--serif); font-size: 14px; margin-bottom: 8px; }
+.project-intel-card p { color: #a3aec2; font-size: 11px; line-height: 1.65; }
 .model-logic {
- border: 1px solid rgba(93, 180, 255, 0.24);
- border-radius: 14px;
- background: rgba(93, 180, 255, 0.055);
+ border: 1px solid var(--line);
+ border-radius: 6px;
+ background: rgba(255, 255, 255, 0.015);
  margin-top: 14px;
  overflow: hidden;
 }
 .model-logic summary {
- color: #eaf3ff;
+ color: #d7ddea;
  cursor: pointer;
- font-size: 11px;
- font-weight: 800;
- letter-spacing: 0.08em;
+ font-family: var(--mono);
+ font-size: 10px;
+ font-weight: 500;
+ letter-spacing: 0.07em;
  padding: 13px 14px;
  text-transform: uppercase;
 }
 .model-logic div {
- border-top: 1px solid rgba(154, 189, 241, 0.14);
- color: #c4d6ef;
+ border-top: 1px solid var(--line);
+ color: #a3aec2;
  font-size: 11px;
  line-height: 1.7;
  padding: 0 14px 14px;
 }
-.closing-panel {
- background:
-   linear-gradient(145deg, rgba(93, 180, 255, 0.13), rgba(232, 193, 111, 0.08)),
-   var(--panel);
- text-align: center;
-}
-.closing-panel h2 { color: #fff; font-size: clamp(26px, 3vw, 40px); margin-bottom: 10px; }
-.closing-panel p { color: #cbdcf4; font-size: 13px; line-height: 1.75; margin: 0 auto; max-width: 820px; }
+.closing-panel { background: var(--panel); text-align: center; }
+.closing-panel h2 { color: #fff; font-size: clamp(24px, 2.8vw, 36px); margin-bottom: 10px; }
+.closing-panel p { color: #a3aec2; font-size: 13px; line-height: 1.75; margin: 0 auto; max-width: 820px; }
 .recommendation {
- border: 1px solid rgba(232, 193, 111, 0.34);
- border-left: 4px solid var(--gold);
- border-radius: 12px;
- background: rgba(232, 193, 111, 0.075);
- color: #f1dfb2;
+ border: 1px solid rgba(201, 163, 95, 0.32);
+ border-left: 3px solid var(--gold);
+ border-radius: 2px;
+ background: rgba(201, 163, 95, 0.05);
+ color: #d6c6a3;
  font-size: 12px;
  line-height: 1.7;
  margin-top: 14px;
@@ -574,20 +520,21 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 .heatmap {
  display: grid;
  grid-template-columns: 1.1fr repeat(4, 1fr);
- gap: 6px;
+ gap: 4px;
  margin-top: 12px;
 }
 .heatmap div {
- border: 1px solid rgba(154, 189, 241, 0.18);
- border-radius: 8px;
+ border: 1px solid var(--line);
+ border-radius: 3px;
  padding: 9px;
  text-align: center;
+ font-family: var(--mono);
  font-size: 10px;
 }
-.heatmap .head { color: #fff; background: rgba(255, 255, 255, 0.055); font-weight: 800; }
-.heatmap .good { color: var(--green); background: rgba(131, 230, 187, 0.12); }
-.heatmap .mid { color: var(--amber); background: rgba(243, 180, 108, 0.12); }
-.heatmap .bad { color: var(--red); background: rgba(240, 140, 148, 0.12); }
+.heatmap .head { color: #fff; background: rgba(255, 255, 255, 0.04); font-weight: 600; }
+.heatmap .good { color: var(--green); background: rgba(111, 156, 127, 0.1); }
+.heatmap .mid { color: var(--amber); background: rgba(198, 143, 82, 0.1); }
+.heatmap .bad { color: var(--red); background: rgba(181, 107, 111, 0.1); }
 .variance-kpi-grid {
  display: grid;
  grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -607,42 +554,42 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 }
 .variance-chart-stack .chart-box { height: 390px; }
 .root-panel {
- border: 1px solid rgba(154, 189, 241, 0.2);
- border-radius: 14px;
- background:
-   linear-gradient(145deg, rgba(93, 180, 255, 0.09), rgba(232, 193, 111, 0.045)),
-   rgba(255, 255, 255, 0.03);
+ border: 1px solid var(--line);
+ border-radius: 6px;
+ background: rgba(255, 255, 255, 0.02);
  padding: 14px;
 }
-.root-panel h3 { color: #fff; font-size: 14px; margin-bottom: 10px; }
-.root-group { border-top: 1px solid rgba(154, 189, 241, 0.14); padding: 11px 0; }
+.root-panel h3 { color: #fff; font-family: var(--serif); font-size: 14px; margin-bottom: 10px; }
+.root-group { border-top: 1px solid var(--line); padding: 11px 0; }
 .root-group:first-of-type { border-top: 0; padding-top: 0; }
 .root-group small {
  color: var(--gold);
  display: block;
+ font-family: var(--mono);
  font-size: 9px;
- font-weight: 800;
- letter-spacing: 0.1em;
+ font-weight: 600;
+ letter-spacing: 0.09em;
  margin-bottom: 6px;
  text-transform: uppercase;
 }
-.root-group p { color: #c4d6ef; font-size: 11px; line-height: 1.6; }
+.root-group p { color: #a3aec2; font-size: 11px; line-height: 1.6; }
 .driver-pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .driver-pill {
- border: 1px solid rgba(154, 189, 241, 0.2);
- border-radius: 999px;
- color: #d7e7ff;
+ border: 1px solid var(--line);
+ border-radius: 3px;
+ color: #b8c1d4;
+ font-family: var(--mono);
  font-size: 9px;
  padding: 5px 8px;
 }
-.driver-pill.pos { border-color: rgba(131, 230, 187, 0.34); color: var(--green); }
-.driver-pill.neg { border-color: rgba(240, 140, 148, 0.34); color: var(--red); }
+.driver-pill.pos { border-color: rgba(111, 156, 127, 0.4); color: var(--green); }
+.driver-pill.neg { border-color: rgba(181, 107, 111, 0.4); color: var(--red); }
 .briefing-card {
- border: 1px solid rgba(232, 193, 111, 0.32);
- border-left: 4px solid var(--gold);
- border-radius: 14px;
- background: rgba(232, 193, 111, 0.075);
- color: #f1dfb2;
+ border: 1px solid rgba(201, 163, 95, 0.3);
+ border-left: 3px solid var(--gold);
+ border-radius: 2px;
+ background: rgba(201, 163, 95, 0.05);
+ color: #d6c6a3;
  font-size: 12px;
  line-height: 1.75;
  margin-top: 14px;
@@ -651,8 +598,9 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 .briefing-card strong {
  color: #fff;
  display: block;
- font-size: 11px;
- letter-spacing: 0.08em;
+ font-family: var(--mono);
+ font-size: 10px;
+ letter-spacing: 0.07em;
  margin-bottom: 5px;
  text-transform: uppercase;
 }
@@ -664,8 +612,8 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 }
 .sparkline { display: flex; align-items: end; gap: 3px; height: 22px; margin-top: 10px; }
 .sparkline span {
- background: linear-gradient(180deg, rgba(128,230,255,.85), rgba(93,180,255,.35));
- border-radius: 999px;
+ background: rgba(201, 163, 95, 0.55);
+ border-radius: 1px;
  display: block;
  width: 100%;
 }
@@ -676,70 +624,72 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
  margin-top: 14px;
 }
 .impact-panel {
- border: 1px solid rgba(154, 189, 241, 0.2);
- border-radius: 14px;
- background: rgba(255, 255, 255, 0.03);
+ border: 1px solid var(--line);
+ border-radius: 6px;
+ background: rgba(255, 255, 255, 0.02);
  padding: 14px;
 }
-.impact-panel h3, .scorecard h3 { color: #fff; font-size: 14px; margin-bottom: 10px; }
+.impact-panel h3, .scorecard h3 { color: #fff; font-family: var(--serif); font-size: 14px; margin-bottom: 10px; }
 .impact-row {
  display: grid;
  grid-template-columns: 130px minmax(0, 1fr) 64px;
  gap: 10px;
  align-items: center;
- color: #d6e5fb;
+ color: #c7cfdf;
  font-size: 11px;
  margin: 9px 0;
 }
-.impact-track { background: rgba(255,255,255,.06); border-radius: 999px; height: 9px; overflow: hidden; }
-.impact-fill { border-radius: 999px; height: 100%; }
-.impact-fill.pos { background: linear-gradient(90deg, rgba(131,230,187,.35), rgba(131,230,187,.92)); }
-.impact-fill.neg { background: linear-gradient(90deg, rgba(240,140,148,.35), rgba(240,140,148,.92)); }
+.impact-track { background: rgba(255,255,255,.05); border-radius: 2px; height: 6px; overflow: hidden; }
+.impact-fill { border-radius: 2px; height: 100%; }
+.impact-fill.pos { background: var(--green); opacity: .85; }
+.impact-fill.neg { background: var(--red); opacity: .85; }
 .scorecard {
- border: 1px solid rgba(232, 193, 111, 0.28);
- border-radius: 14px;
- background: linear-gradient(145deg, rgba(232, 193, 111, 0.08), rgba(93, 180, 255, 0.05));
+ border: 1px solid rgba(201, 163, 95, 0.28);
+ border-radius: 6px;
+ background: rgba(201, 163, 95, 0.04);
  padding: 14px;
 }
 .score-gauge {
  align-items: center;
- border: 1px solid rgba(131,230,187,.26);
+ border: 1px solid rgba(111, 156, 127, 0.3);
  border-radius: 999px;
- background: conic-gradient(var(--green) 0 92%, rgba(255,255,255,.08) 92% 100%);
+ background: conic-gradient(var(--green) 0 92%, rgba(255,255,255,.06) 92% 100%);
  display: flex;
- height: 132px;
+ height: 124px;
  justify-content: center;
  margin: 8px auto 14px;
- width: 132px;
+ width: 124px;
 }
 .score-gauge strong {
  align-items: center;
- background: #071526;
+ background: #0a0e17;
  border-radius: 999px;
  color: #fff;
  display: flex;
- font-size: 25px;
- height: 96px;
+ font-family: var(--mono);
+ font-size: 22px;
+ height: 92px;
  justify-content: center;
- width: 96px;
+ width: 92px;
 }
-.scenario-toggle { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.scenario-toggle { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
 .scenario-toggle button {
- border: 1px solid rgba(154, 189, 241, 0.26);
- border-radius: 999px;
- background: rgba(255,255,255,.035);
- color: #cfe0fb;
+ border: 1px solid var(--line);
+ border-radius: 3px;
+ background: transparent;
+ color: #97a2b8;
  cursor: pointer;
  font: inherit;
+ font-family: var(--mono);
  font-size: 10px;
- letter-spacing: .08em;
+ letter-spacing: .06em;
  padding: 8px 12px;
  text-transform: uppercase;
 }
 .scenario-toggle button.active, .scenario-toggle button:hover {
- background: rgba(93,180,255,.16);
- border-color: rgba(93,180,255,.78);
- color: #fff;
+ background: rgba(201, 163, 95, 0.08);
+ border-color: rgba(201, 163, 95, 0.5);
+ color: var(--gold);
 }
 .priority-grid {
  display: grid;
@@ -748,10 +698,10 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
  margin-top: 14px;
 }
 .priority-card {
- border: 1px solid rgba(154, 189,241,.2);
- border-radius: 14px;
- background: rgba(255,255,255,.03);
- color: #c4d6ef;
+ border: 1px solid var(--line);
+ border-radius: 6px;
+ background: rgba(255,255,255,.02);
+ color: #a3aec2;
  font-size: 11px;
  line-height: 1.55;
  padding: 13px;
@@ -759,14 +709,15 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 .priority-card strong {
  color: var(--gold);
  display: block;
- font-size: 10px;
- letter-spacing: .08em;
+ font-family: var(--mono);
+ font-size: 9px;
+ letter-spacing: .07em;
  margin-bottom: 6px;
  text-transform: uppercase;
 }
-.slide h3, .case-card h3, .tool-card h3 { font-size: 13px; color: #fff; margin-bottom: 8px; }
-.slide p, .case-card p, .tool-card p { color: #c4d6ef; font-size: 11px; line-height: 1.62; }
-.footer { padding: 32px 0 44px; text-align: center; color: var(--muted); font-size: 10px; }
+.slide h3, .case-card h3, .tool-card h3 { font-family: var(--serif); font-size: 14px; color: #fff; margin-bottom: 8px; }
+.slide p, .case-card p, .tool-card p { color: #a3aec2; font-size: 11px; line-height: 1.62; }
+.footer { padding: 32px 0 44px; text-align: center; color: var(--muted); font-family: var(--mono); font-size: 10px; }
 @media (max-width: 1120px) {
  .hero, .grid-2, .tree { grid-template-columns: 1fr; }
  .grid-3, .grid-4, .grid-5, .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -839,7 +790,7 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 </div>
 </div>
 </section>
- 
+
 <section id="flagship">
 <div class="panel">
 <div class="section-head">
@@ -878,7 +829,7 @@ input[type="range"] { width: 100%; accent-color: var(--blue); }
 </div>
 </div>
 </section>
- 
+
 <section id="forecasting">
 <div class="panel">
 <div class="section-head">
@@ -957,7 +908,7 @@ Revenue is expected to grow by $82M driven by new deal wins and pricing improvem
 </div>
 </div>
 </section>
- 
+
 <section id="variance">
 <div class="panel">
 <div class="section-head">
@@ -1025,7 +976,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 </div>
 </div>
 </section>
- 
+
 <section id="scenario">
 <div class="panel">
 <div class="section-head">
@@ -1055,7 +1006,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 </div>
 </div>
 </section>
- 
+
 <section id="drivers">
 <div class="panel">
 <div class="section-head">
@@ -1088,7 +1039,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 <div class="decision-strip" id="driverInsight" style="margin-top: 14px;"><strong>Volume Decision</strong>Impact: -$8.7M. Root cause: delayed account ramp and softer demand. Recommendation: leadership should approve account-level recovery actions and weekly volume governance for priority accounts.</div>
 </div>
 </section>
- 
+
 <section id="review">
 <div class="panel">
 <div class="section-head">
@@ -1108,7 +1059,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 </div>
 </div>
 </section>
- 
+
 <section id="projects">
 <div class="panel">
 <div class="section-head">
@@ -1127,7 +1078,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 <button class="project-tab-btn" type="button" data-project-pane="margin-recovery">Margin Recovery</button>
 <button class="project-tab-btn" type="button" data-project-pane="summary">Project Summary</button>
 </div>
- 
+
 <div class="project-pane active" id="project-earnings">
 <div class="section-head">
 <div>
@@ -1178,7 +1129,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 </details>
 <div class="decision-strip"><strong>Project Outcome</strong>Completed an earnings review comparing Tesla Q1 FY2026 actual performance against analyst consensus, translating financial variance into executive-level investment and business insights.</div>
 </div>
- 
+
 <div class="project-pane" id="project-dcf">
 <div class="section-head">
 <div>
@@ -1221,7 +1172,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 </details>
 <div class="decision-strip"><strong>Project Outcome</strong>Built a DCF-style valuation case study connecting operating forecasts, free cash flow generation, WACC, terminal value, and investment decision-making.</div>
 </div>
- 
+
 <div class="project-pane" id="project-project-scenario">
 <div class="section-head">
 <div>
@@ -1274,7 +1225,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 </details>
 <div class="decision-strip"><strong>Project Outcome</strong>Designed a scenario planning model that helps leadership quantify upside, base case, and downside financial outcomes before making strategic decisions.</div>
 </div>
- 
+
 <div class="project-pane" id="project-dashboard">
 <div class="section-head">
 <div>
@@ -1318,7 +1269,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 </details>
 <div class="decision-strip"><strong>Project Outcome</strong>Developed a CFO dashboard translating raw financial data into executive KPIs, variance explanations, margin insights, and management actions.</div>
 </div>
- 
+
 <div class="project-pane" id="project-margin-recovery">
 <div class="section-head">
 <div>
@@ -1344,7 +1295,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 </details>
 <div class="decision-strip"><strong>Project Outcome</strong>Built an executive margin recovery case study that links financial analysis to operating decisions, cost savings, revenue uplift, and forecast accuracy.</div>
 </div>
- 
+
 <div class="project-pane" id="project-summary">
 <div class="section-head">
 <div>
@@ -1364,7 +1315,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 </div>
 </div>
 </section>
- 
+
 <section id="cash">
 <div class="panel">
 <div class="section-head">
@@ -1390,7 +1341,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 </div>
 </div>
 </section>
- 
+
 <section id="credentials">
 <div class="panel">
 <div class="section-head">
@@ -1427,7 +1378,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 </div>
 </div>
 </section>
- 
+
 <section id="toolkit">
 <div class="panel">
 <div class="section-head">
@@ -1447,7 +1398,7 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 </div>
 </div>
 </section>
- 
+
 <section id="decisions">
 <div class="panel">
 <div class="section-head">
@@ -1467,31 +1418,17 @@ Operating margin improved from 4.0% to 15.4% through pricing optimization, utili
 </div>
 </div>
 </section>
- 
+
 <div class="footer">
 Sanju Nivasini | FP&amp;A Decision Intelligence Platform | Built to demonstrate forecasting, variance analysis, financial modeling, executive reporting, and business decision support.
 </div>
 </main>
- 
+
 <script>
-const chartText = "#bed2ee";
-const gridColor = "rgba(154, 189, 241, 0.13)";
+const chartText = "#98a3b8";
+const gridColor = "rgba(160, 172, 196, 0.1)";
 const money = value => "$" + value.toFixed(1) + "M";
- 
-const heroName = document.querySelector(".hero h1");
-if (heroName && !heroName.dataset.split) {
- const text = heroName.textContent;
- heroName.textContent = "";
- [...text].forEach((char, index) => {
-   const span = document.createElement("span");
-   span.className = "char";
-   span.style.animationDelay = (index * 28) + "ms";
-   span.textContent = char === " " ? "\u00a0" : char;
-   heroName.appendChild(span);
- });
- heroName.dataset.split = "true";
-}
- 
+
 const scrollProgress = document.getElementById("scrollProgress");
 function updateScrollProgress() {
  const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -1500,30 +1437,12 @@ function updateScrollProgress() {
 }
 window.addEventListener("scroll", updateScrollProgress, { passive: true });
 updateScrollProgress();
- 
-window.addEventListener("pointermove", event => {
- document.body.style.setProperty("--mx", event.clientX + "px");
- document.body.style.setProperty("--my", event.clientY + "px");
-}, { passive: true });
- 
-const sectionMotion = {
- flagship: "up",
- forecasting: "blur",
- variance: "center",
- scenario: "up",
- projects: "left",
- review: "unfold"
-};
-Object.entries(sectionMotion).forEach(([id, motion]) => {
- const section = document.getElementById(id);
- if (section) section.dataset.motion = motion;
-});
- 
+
 document.querySelectorAll("section:not(.hero), .panel, .metric, .kpi, .slide, .case-card, .tool-card, .tree-card, .credential-card, .flow-step").forEach((element, index) => {
  element.classList.add("reveal");
- element.style.transitionDelay = (Math.min(index % 8, 7) * 35) + "ms";
+ element.style.transitionDelay = (Math.min(index % 8, 7) * 25) + "ms";
 });
- 
+
 const revealObserver = new IntersectionObserver(entries => {
  entries.forEach(entry => {
    if (entry.isIntersecting) {
@@ -1533,7 +1452,7 @@ const revealObserver = new IntersectionObserver(entries => {
  });
 }, { threshold: 0.14 });
 document.querySelectorAll(".reveal").forEach(element => revealObserver.observe(element));
- 
+
 const navLinks = Array.from(document.querySelectorAll(".links a[href^='#']"));
 const navTargets = navLinks.map(link => document.querySelector(link.getAttribute("href"))).filter(Boolean);
 function setActiveNav(id) {
@@ -1556,14 +1475,14 @@ window.addEventListener("scroll", () => {
  });
  if (current) setActiveNav(current.id);
 }, { passive: true });
- 
+
 const flowObserver = new IntersectionObserver(entries => {
  entries.forEach(entry => {
    if (entry.isIntersecting) entry.target.classList.add("active");
  });
 }, { threshold: 0.55 });
 document.querySelectorAll(".flow-step").forEach(step => flowObserver.observe(step));
- 
+
 const kpiTooltip = document.getElementById("kpiTooltip");
 document.querySelectorAll(".kpi, .metric").forEach(card => {
  card.addEventListener("mouseenter", () => {
@@ -1581,7 +1500,7 @@ document.querySelectorAll(".kpi, .metric").forEach(card => {
  });
  card.addEventListener("mouseleave", () => kpiTooltip?.classList.remove("visible"));
 });
- 
+
 function animateCount(element) {
  const target = Number(element.dataset.count);
  const startValue = Number(element.dataset.start || 0);
@@ -1606,13 +1525,13 @@ const countObserver = new IntersectionObserver(entries => {
  });
 }, { threshold: 0.65 });
 document.querySelectorAll(".count-up").forEach(element => countObserver.observe(element));
- 
+
 function makeChart(canvasId, config) {
  const canvas = document.getElementById(canvasId);
  if (!canvas || !window.Chart) return null;
  return new Chart(canvas, config);
 }
- 
+
 const bridgeLabelPlugin = {
  id: "bridgeLabelPlugin",
  afterDatasetsDraw(chart) {
@@ -1622,7 +1541,7 @@ const bridgeLabelPlugin = {
    const meta = chart.getDatasetMeta(0);
    const dataset = chart.data.datasets[0];
    ctx.save();
-   ctx.font = "800 13px Manrope, sans-serif";
+   ctx.font = "600 12px 'IBM Plex Mono', monospace";
    ctx.textAlign = "center";
    ctx.textBaseline = "middle";
    dataset.data.forEach((value, index) => {
@@ -1631,14 +1550,14 @@ const bridgeLabelPlugin = {
      const raw = Array.isArray(value) ? value[1] - value[0] : value;
      const label = (dataset.displayLabels && dataset.displayLabels[index]) || raw;
      const props = bar.tooltipPosition();
-     ctx.fillStyle = raw < 0 ? "#f08c94" : (index === 0 || index === dataset.data.length - 1) ? "#f4d895" : "#83e6bb";
+     ctx.fillStyle = raw < 0 ? "#b56b6f" : (index === 0 || index === dataset.data.length - 1) ? "#d9c088" : "#6f9c7f";
      ctx.fillText(label, props.x, props.y - 16);
    });
    ctx.restore();
  }
 };
 if (window.Chart) Chart.register(bridgeLabelPlugin);
- 
+
 const commonOptions = {
  responsive: true,
  maintainAspectRatio: false,
@@ -1648,7 +1567,7 @@ const commonOptions = {
    y: { ticks: { color: chartText }, grid: { color: gridColor } }
  }
 };
- 
+
 makeChart("marginTransformChart", {
  type: "bar",
  data: {
@@ -1656,14 +1575,14 @@ makeChart("marginTransformChart", {
    datasets: [{
      label: "Operating Margin %",
      data: [4.0, 6.2, 9.1, 11.3, 13.2, 14.2, 15.4],
-     backgroundColor: ["rgba(240,140,148,.72)", "rgba(93,180,255,.68)", "rgba(93,180,255,.68)", "rgba(93,180,255,.68)", "rgba(93,180,255,.68)", "rgba(93,180,255,.68)", "rgba(131,230,187,.76)"],
+     backgroundColor: ["rgba(181, 107, 111,.72)", "rgba(91, 132, 173,.68)", "rgba(91, 132, 173,.68)", "rgba(91, 132, 173,.68)", "rgba(91, 132, 173,.68)", "rgba(91, 132, 173,.68)", "rgba(111, 156, 127,.76)"],
      borderColor: "rgba(255,255,255,.22)",
      borderWidth: 1
    }]
  },
  options: commonOptions
 });
- 
+
 makeChart("forecastChart", {
  type: "bar",
  data: {
@@ -1672,14 +1591,14 @@ makeChart("forecastChart", {
      label: "Revenue Build-Up Waterfall ($M)",
      data: [[0, 780], [780, 845], [845, 918], [918, 960], [892, 960], [862, 892], [0, 862]],
      displayLabels: ["$780M", "+$65M", "+$73M", "+$42M", "-$68M", "-$30M", "$862M"],
-     backgroundColor: ["rgba(232,193,111,.82)", "rgba(131,230,187,.78)", "rgba(131,230,187,.78)", "rgba(131,230,187,.78)", "rgba(240,140,148,.78)", "rgba(240,140,148,.78)", "rgba(232,193,111,.82)"],
+     backgroundColor: ["rgba(201, 163, 95,.82)", "rgba(111, 156, 127,.78)", "rgba(111, 156, 127,.78)", "rgba(111, 156, 127,.78)", "rgba(181, 107, 111,.78)", "rgba(181, 107, 111,.78)", "rgba(201, 163, 95,.82)"],
      borderColor: "rgba(255,255,255,.22)",
      borderWidth: 1
    }]
  },
  options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ": " + ctx.dataset.displayLabels[ctx.dataIndex] } } } }
 });
- 
+
 makeChart("forecastMarginChart", {
  type: "bar",
  data: {
@@ -1688,14 +1607,14 @@ makeChart("forecastMarginChart", {
      label: "Margin Expansion Bridge (%)",
      data: [[0, 28.4], [28.4, 30.2], [30.2, 31.5], [31.5, 32.2], [32.2, 33.1], [32.6, 33.1], [0, 32.6]],
      displayLabels: ["28.4%", "+1.8%", "+1.3%", "+0.7%", "+0.9%", "-0.5%", "32.6%"],
-     backgroundColor: ["rgba(232,193,111,.82)", "rgba(131,230,187,.78)", "rgba(131,230,187,.78)", "rgba(131,230,187,.78)", "rgba(131,230,187,.78)", "rgba(240,140,148,.78)", "rgba(232,193,111,.82)"],
+     backgroundColor: ["rgba(201, 163, 95,.82)", "rgba(111, 156, 127,.78)", "rgba(111, 156, 127,.78)", "rgba(111, 156, 127,.78)", "rgba(111, 156, 127,.78)", "rgba(181, 107, 111,.78)", "rgba(201, 163, 95,.82)"],
      borderColor: "rgba(255,255,255,.22)",
      borderWidth: 1
    }]
  },
  options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ": " + ctx.dataset.displayLabels[ctx.dataIndex] } } } }
 });
- 
+
 const forecastCases = {
  best: { revenue: "$910M", cost: "$604M", margin: "35.4%", cash: "$158M" },
  base: { revenue: "$862.4M", cost: "$598.6M", margin: "32.6%", cash: "$134M" },
@@ -1716,7 +1635,7 @@ document.querySelectorAll(".forecast-scenario-btn").forEach(button => {
    updateForecastCase(button.dataset.forecastCase);
  });
 });
- 
+
 const varianceChart = makeChart("varianceChart", {
  type: "bar",
  data: {
@@ -1725,14 +1644,14 @@ const varianceChart = makeChart("varianceChart", {
      label: "Operating Margin Recovery (%)",
      data: [[0, 4.0], [4.0, 6.8], [6.8, 10.2], [10.2, 12.3], [12.3, 13.8], [13.8, 15.4], [0, 15.4]],
      displayLabels: ["4.0%", "+2.8%", "+3.4%", "+2.1%", "+1.5%", "+1.6%", "15.4%"],
-     backgroundColor: ["rgba(232,193,111,.82)", "rgba(131,230,187,.78)", "rgba(131,230,187,.78)", "rgba(131,230,187,.78)", "rgba(131,230,187,.78)", "rgba(131,230,187,.78)", "rgba(232,193,111,.82)"],
+     backgroundColor: ["rgba(201, 163, 95,.82)", "rgba(111, 156, 127,.78)", "rgba(111, 156, 127,.78)", "rgba(111, 156, 127,.78)", "rgba(111, 156, 127,.78)", "rgba(111, 156, 127,.78)", "rgba(201, 163, 95,.82)"],
      borderColor: "rgba(255,255,255,.22)",
      borderWidth: 1
    }]
  },
  options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ": " + ctx.dataset.displayLabels[ctx.dataIndex] } } } }
 });
- 
+
 const costBridgeChart = makeChart("costBridgeChart", {
  type: "bar",
  data: {
@@ -1741,156 +1660,156 @@ const costBridgeChart = makeChart("costBridgeChart", {
      label: "Cost Optimization Bridge ($M)",
      data: [[0, 760], [748, 760], [740, 748], [735, 740], [728, 735], [726, 728], [0, 726]],
      displayLabels: ["$760M", "-$12M", "-$8M", "-$5M", "-$7M", "-$2M", "$726M"],
-     backgroundColor: ["rgba(232,193,111,.82)", "rgba(93,180,255,.78)", "rgba(93,180,255,.78)", "rgba(93,180,255,.78)", "rgba(93,180,255,.78)", "rgba(93,180,255,.78)", "rgba(232,193,111,.82)"],
+     backgroundColor: ["rgba(201, 163, 95,.82)", "rgba(91, 132, 173,.78)", "rgba(91, 132, 173,.78)", "rgba(91, 132, 173,.78)", "rgba(91, 132, 173,.78)", "rgba(91, 132, 173,.78)", "rgba(201, 163, 95,.82)"],
      borderColor: "rgba(255,255,255,.22)",
      borderWidth: 1
    }]
  },
  options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ": " + ctx.dataset.displayLabels[ctx.dataIndex] } } } }
 });
- 
+
 let scenarioChart = makeChart("scenarioChart", {
  type: "bar",
  data: {
    labels: ["Worst", "Base", "Best"],
-   datasets: [{ label: "Operating Profit ($M)", data: [14.1, 18.3, 22.8], backgroundColor: ["rgba(240,140,148,.74)", "rgba(93,180,255,.72)", "rgba(131,230,187,.76)"] }]
+   datasets: [{ label: "Operating Profit ($M)", data: [14.1, 18.3, 22.8], backgroundColor: ["rgba(181, 107, 111,.74)", "rgba(91, 132, 173,.72)", "rgba(111, 156, 127,.76)"] }]
  },
  options: commonOptions
 });
- 
+
 makeChart("cashChart", {
  type: "bar",
  data: {
    labels: ["Current DSO", "Target DSO", "Cash Released"],
-   datasets: [{ label: "Working Capital", data: [62, 52, 23.6], backgroundColor: ["rgba(240,140,148,.72)", "rgba(93,180,255,.72)", "rgba(131,230,187,.76)"] }]
+   datasets: [{ label: "Working Capital", data: [62, 52, 23.6], backgroundColor: ["rgba(181, 107, 111,.72)", "rgba(91, 132, 173,.72)", "rgba(111, 156, 127,.76)"] }]
  },
  options: commonOptions
 });
- 
+
 makeChart("teslaRevenueChart", {
  type: "bar",
  data: {
    labels: ["Revenue", "Gross Profit", "Operating Income", "Free Cash Flow"],
    datasets: [
-     { label: "Actual", data: [22.4, 4.7, 0.941, 1.44], backgroundColor: "rgba(131,230,187,.72)" },
-     { label: "Consensus", data: [21.1, 4.3, 0.525, -1.78], backgroundColor: "rgba(93,180,255,.62)" }
+     { label: "Actual", data: [22.4, 4.7, 0.941, 1.44], backgroundColor: "rgba(111, 156, 127,.72)" },
+     { label: "Consensus", data: [21.1, 4.3, 0.525, -1.78], backgroundColor: "rgba(91, 132, 173,.62)" }
    ]
  },
  options: commonOptions
 });
- 
+
 makeChart("teslaProfitChart", {
  type: "bar",
  data: {
    labels: ["Gross Profit", "Operating Income", "FCF Beat", "EPS Beat"],
-   datasets: [{ label: "Beat / Miss", data: [0.4, 0.416, 3.22, 0.11], backgroundColor: ["rgba(131,230,187,.75)", "rgba(131,230,187,.75)", "rgba(131,230,187,.75)", "rgba(232,193,111,.72)"] }]
+   datasets: [{ label: "Beat / Miss", data: [0.4, 0.416, 3.22, 0.11], backgroundColor: ["rgba(111, 156, 127,.75)", "rgba(111, 156, 127,.75)", "rgba(111, 156, 127,.75)", "rgba(201, 163, 95,.72)"] }]
  },
  options: commonOptions
 });
- 
+
 makeChart("teslaMixChart", {
  type: "doughnut",
  data: {
    labels: ["Automotive", "Energy", "Services & Other"],
-   datasets: [{ data: [16.2, 2.4, 3.7], backgroundColor: ["rgba(93,180,255,.78)", "rgba(232,193,111,.76)", "rgba(131,230,187,.74)"], borderColor: "rgba(255,255,255,.15)" }]
+   datasets: [{ data: [16.2, 2.4, 3.7], backgroundColor: ["rgba(91, 132, 173,.78)", "rgba(201, 163, 95,.76)", "rgba(111, 156, 127,.74)"], borderColor: "rgba(255,255,255,.15)" }]
  },
  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: chartText, boxWidth: 12 } } } }
 });
- 
+
 makeChart("dcfRevenueChart", {
  type: "line",
  data: {
    labels: ["FY26", "FY27", "FY28", "FY29", "FY30"],
-   datasets: [{ label: "Revenue Forecast ($B)", data: [101, 112, 126, 143, 162], borderColor: "#5db4ff", backgroundColor: "rgba(93,180,255,.12)", tension: .35, fill: true }]
+   datasets: [{ label: "Revenue Forecast ($B)", data: [101, 112, 126, 143, 162], borderColor: "#5b84ad", backgroundColor: "rgba(91, 132, 173,.12)", tension: .35, fill: true }]
  },
  options: commonOptions
 });
- 
+
 makeChart("dcfFcfChart", {
  type: "bar",
  data: {
    labels: ["FY26", "FY27", "FY28", "FY29", "FY30"],
    datasets: [
-     { label: "EBITDA ($B)", data: [13.8, 16.4, 20.1, 24.6, 30.2], backgroundColor: "rgba(93,180,255,.68)" },
-     { label: "FCF ($B)", data: [5.4, 7.2, 9.8, 12.6, 16.1], backgroundColor: "rgba(131,230,187,.72)" }
+     { label: "EBITDA ($B)", data: [13.8, 16.4, 20.1, 24.6, 30.2], backgroundColor: "rgba(91, 132, 173,.68)" },
+     { label: "FCF ($B)", data: [5.4, 7.2, 9.8, 12.6, 16.1], backgroundColor: "rgba(111, 156, 127,.72)" }
    ]
  },
  options: commonOptions
 });
- 
+
 makeChart("dcfFootballChart", {
  type: "bar",
  data: {
    labels: ["Worst", "Current", "Base", "Best"],
-   datasets: [{ label: "Value / Share", data: [190, 250, 285, 365], backgroundColor: ["rgba(240,140,148,.72)", "rgba(232,193,111,.68)", "rgba(93,180,255,.72)", "rgba(131,230,187,.76)"] }]
+   datasets: [{ label: "Value / Share", data: [190, 250, 285, 365], backgroundColor: ["rgba(181, 107, 111,.72)", "rgba(201, 163, 95,.68)", "rgba(91, 132, 173,.72)", "rgba(111, 156, 127,.76)"] }]
  },
  options: { ...commonOptions, indexAxis: "y" }
 });
- 
+
 makeChart("projectScenarioRevenueChart", {
  type: "line",
  data: {
    labels: ["Y1", "Y2", "Y3", "Y4", "Y5"],
    datasets: [
-     { label: "Best", data: [100, 116, 134, 155, 180], borderColor: "#83e6bb", tension: .35 },
-     { label: "Base", data: [100, 110, 121, 133, 146], borderColor: "#5db4ff", tension: .35 },
-     { label: "Worst", data: [100, 96, 94, 96, 99], borderColor: "#f08c94", tension: .35 }
+     { label: "Best", data: [100, 116, 134, 155, 180], borderColor: "#6f9c7f", tension: .35 },
+     { label: "Base", data: [100, 110, 121, 133, 146], borderColor: "#5b84ad", tension: .35 },
+     { label: "Worst", data: [100, 96, 94, 96, 99], borderColor: "#b56b6f", tension: .35 }
    ]
  },
  options: commonOptions
 });
- 
+
 const projectScenarioEbitdaChart = makeChart("projectScenarioEbitdaChart", {
  type: "bar",
  data: {
    labels: ["Worst", "Base", "Best"],
-   datasets: [{ label: "EBITDA ($B)", data: [11.2, 18.0, 29.4], backgroundColor: ["rgba(240,140,148,.72)", "rgba(93,180,255,.72)", "rgba(131,230,187,.76)"] }]
+   datasets: [{ label: "EBITDA ($B)", data: [11.2, 18.0, 29.4], backgroundColor: ["rgba(181, 107, 111,.72)", "rgba(91, 132, 173,.72)", "rgba(111, 156, 127,.76)"] }]
  },
  options: commonOptions
 });
- 
+
 const projectScenarioValueChart = makeChart("projectScenarioValueChart", {
  type: "bar",
  data: {
    labels: ["Worst", "Base", "Best"],
-   datasets: [{ label: "Enterprise Value ($B)", data: [580, 875, 1160], backgroundColor: ["rgba(240,140,148,.72)", "rgba(93,180,255,.72)", "rgba(131,230,187,.76)"] }]
+   datasets: [{ label: "Enterprise Value ($B)", data: [580, 875, 1160], backgroundColor: ["rgba(181, 107, 111,.72)", "rgba(91, 132, 173,.72)", "rgba(111, 156, 127,.76)"] }]
  },
  options: commonOptions
 });
- 
+
 makeChart("dashRevenueTrendChart", {
  type: "line",
  data: {
    labels: ["FY22", "FY23", "FY24", "FY25", "FY26"],
    datasets: [
-     { label: "Revenue ($M)", data: [386, 412, 441, 455, 490.9], borderColor: "#83e6bb", backgroundColor: "rgba(131,230,187,.1)", tension: .35, fill: true },
-     { label: "Margin %", data: [12.1, 13.2, 14.0, 14.7, 14.3], borderColor: "#e8c16f", tension: .35 }
+     { label: "Revenue ($M)", data: [386, 412, 441, 455, 490.9], borderColor: "#6f9c7f", backgroundColor: "rgba(111, 156, 127,.1)", tension: .35, fill: true },
+     { label: "Margin %", data: [12.1, 13.2, 14.0, 14.7, 14.3], borderColor: "#c9a35f", tension: .35 }
    ]
  },
  options: commonOptions
 });
- 
+
 makeChart("dashBudgetChart", {
  type: "bar",
  data: {
    labels: ["Revenue", "Profit", "Margin %"],
    datasets: [
-     { label: "Actual", data: [490.9, 70.1, 14.3], backgroundColor: "rgba(131,230,187,.72)" },
-     { label: "Budget", data: [475.0, 73.5, 15.5], backgroundColor: "rgba(93,180,255,.62)" }
+     { label: "Actual", data: [490.9, 70.1, 14.3], backgroundColor: "rgba(111, 156, 127,.72)" },
+     { label: "Budget", data: [475.0, 73.5, 15.5], backgroundColor: "rgba(91, 132, 173,.62)" }
    ]
  },
  options: commonOptions
 });
- 
+
 makeChart("dashExpenseChart", {
  type: "doughnut",
  data: {
    labels: ["COGS", "Salary", "Third Party", "Sales & Marketing", "G&A"],
-   datasets: [{ data: [308, 54, 28, 18, 12], backgroundColor: ["rgba(93,180,255,.74)", "rgba(232,193,111,.72)", "rgba(240,140,148,.7)", "rgba(131,230,187,.72)", "rgba(128,230,255,.66)"], borderColor: "rgba(255,255,255,.15)" }]
+   datasets: [{ data: [308, 54, 28, 18, 12], backgroundColor: ["rgba(91, 132, 173,.74)", "rgba(201, 163, 95,.72)", "rgba(181, 107, 111,.7)", "rgba(111, 156, 127,.72)", "rgba(125, 153, 184,.66)"], borderColor: "rgba(255,255,255,.15)" }]
  },
  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: chartText, boxWidth: 12 } } } }
 });
- 
+
 document.querySelectorAll(".project-tab-btn").forEach(button => {
  button.addEventListener("click", () => {
    document.querySelectorAll(".project-tab-btn").forEach(item => item.classList.remove("active"));
@@ -1902,7 +1821,7 @@ document.querySelectorAll(".project-tab-btn").forEach(button => {
    });
  });
 });
- 
+
 const projectControls = {
  revenue: document.getElementById("projectRevSlider"),
  margin: document.getElementById("projectMarginSlider"),
@@ -1916,19 +1835,19 @@ function updateProjectScenario() {
  const sga = Number(projectControls.sga.value);
  const capex = Number(projectControls.capex.value);
  const wacc = Number(projectControls.wacc.value);
- 
+
  document.getElementById("projectRevVal").textContent = rev + "%";
  document.getElementById("projectMarginVal").textContent = margin + " pts";
  document.getElementById("projectSgaVal").textContent = sga + " pts";
  document.getElementById("projectCapexVal").textContent = capex + "%";
  document.getElementById("projectWaccVal").textContent = wacc + " pts";
- 
+
  const revenue = 100 * (1 + rev / 100);
  const ebitdaMargin = 18 + margin - sga;
  const ebitda = revenue * ebitdaMargin / 100;
  const fcf = ebitda * 0.54 - (capex * 0.18);
  const value = 285 + rev * 7.2 + margin * 14 - sga * 10 - capex * 1.8 - wacc * 23;
- 
+
  document.getElementById("projectScenarioRevenue").textContent = "$" + revenue.toFixed(1) + "B";
  document.getElementById("projectScenarioEbitda").textContent = "$" + ebitda.toFixed(1) + "B";
  document.getElementById("projectScenarioFcf").textContent = "$" + fcf.toFixed(1) + "B";
@@ -1937,7 +1856,7 @@ function updateProjectScenario() {
    "<strong>Executive Summary</strong>Scenario output shows revenue at $" + revenue.toFixed(1) +
    "B, EBITDA at $" + ebitda.toFixed(1) + "B, FCF at $" + fcf.toFixed(1) +
    "B, and valuation at $" + value.toFixed(0) + "/share. Revenue growth and margin remain the most important planning levers.";
- 
+
  if (projectScenarioEbitdaChart && projectScenarioValueChart) {
    projectScenarioEbitdaChart.data.datasets[0].data = [ebitda * 0.68, ebitda, ebitda * 1.35];
    projectScenarioValueChart.data.datasets[0].data = [value * 0.72, value, value * 1.28];
@@ -1947,7 +1866,7 @@ function updateProjectScenario() {
 }
 Object.values(projectControls).forEach(control => control.addEventListener("input", updateProjectScenario));
 updateProjectScenario();
- 
+
 const controls = {
  revenue: document.getElementById("revSlider"),
  salary: document.getElementById("salarySlider"),
@@ -1961,17 +1880,17 @@ function updateScenario() {
  const subconChange = Number(controls.subcon.value);
  const utilizationChange = Number(controls.utilization.value);
  const attritionChange = Number(controls.attrition.value);
- 
+
  document.getElementById("revVal").textContent = revenueChange + "%";
  document.getElementById("salaryVal").textContent = salaryChange + "%";
  document.getElementById("subconVal").textContent = subconChange + "%";
  document.getElementById("utilVal").textContent = utilizationChange + "%";
  document.getElementById("attritionVal").textContent = attritionChange + "%";
- 
+
  const baseRevenue = 119.0;
  const baseProfit = 18.3;
  const baseCash = 16.8;
- 
+
  const revenue = baseRevenue * (1 + revenueChange / 100) * (1 + utilizationChange * 0.0025) * (1 - Math.max(attritionChange, 0) * 0.0025);
  const salaryImpact = salaryChange * 0.28;
  const subconImpact = subconChange * 0.18;
@@ -1980,7 +1899,7 @@ function updateScenario() {
  const profit = baseProfit + (revenue - baseRevenue) * 0.22 - salaryImpact - subconImpact + utilizationImpact - attritionImpact;
  const margin = profit / revenue * 100;
  const cash = baseCash + (profit - baseProfit) * 0.72 + utilizationChange * 0.08 - Math.max(attritionChange, 0) * 0.12;
- 
+
  document.getElementById("scenarioRevenue").textContent = money(revenue);
  document.getElementById("scenarioProfit").textContent = money(profit);
  document.getElementById("scenarioMargin").textContent = margin.toFixed(1) + "%";
@@ -1989,14 +1908,14 @@ function updateScenario() {
  document.getElementById("scenarioProfitDelta").textContent = "Operating profit forecast";
  document.getElementById("scenarioMarginDelta").textContent = "Operating margin forecast";
  document.getElementById("scenarioCashDelta").textContent = "Cash flow forecast";
- 
+
  ["scenarioRevenue", "scenarioProfit", "scenarioMargin", "scenarioCash"].forEach(id => {
    const card = document.getElementById(id)?.closest(".kpi");
    if (!card) return;
    card.classList.remove("metric-positive", "metric-negative");
    void card.offsetWidth;
  });
- 
+
  const metricPairs = [
    ["scenarioRevenue", revenue - baseRevenue],
    ["scenarioProfit", profit - baseProfit],
@@ -2008,7 +1927,7 @@ function updateScenario() {
    if (!card || Math.abs(delta) < 0.05) return;
    card.classList.add(delta > 0 ? "metric-positive" : "metric-negative");
  });
- 
+
  if (scenarioChart) {
    scenarioChart.data.datasets[0].data = [profit * 0.82, profit, profit * 1.18];
    scenarioChart.update();
@@ -2016,7 +1935,7 @@ function updateScenario() {
 }
 Object.values(controls).forEach(control => control.addEventListener("input", updateScenario));
 updateScenario();
- 
+
 const driverCopy = {
  volume: ["Volume Decision", "Impact: -$8.7M. Root cause: delayed account ramp and softer demand. Recommendation: leadership should approve account-level recovery actions and weekly volume governance for priority accounts."],
  price: ["Pricing Decision", "Impact: +$2.8M. Root cause: selective rate realization. Recommendation: preserve price discipline and restrict discounting unless margin-accretive."],
